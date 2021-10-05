@@ -1,0 +1,25 @@
+version: '3.9'
+services:
+  caddy:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - data:/data
+      - ./etc:/etc/caddy
+      - ./svr:/svr
+    networks:
+      - default
+    ports:
+      - 80:80/tcp
+      - 443:443/tcp
+      - 443:443/udp
+    logging:
+      driver: syslog
+      options:
+        tag: caddy
+    restart: always
+networks:
+  default:
+volumes:
+  data:

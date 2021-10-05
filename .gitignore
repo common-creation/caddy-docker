@@ -1,0 +1,5 @@
+etc/*
+!etc/sample.Caddyfile
+svr/*
+!**/.gitkeep
+.env

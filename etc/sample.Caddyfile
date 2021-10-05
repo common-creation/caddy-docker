@@ -1,0 +1,33 @@
+{
+  debug
+  order realip first
+  cert_issuer zerossl {env.ZEROSSL_API_KEY}
+  acme_dns cloudflare {env.CLOUDFLARE_API_KEY}
+  servers :443 {
+    protocol {
+      experimental_http3
+    }
+  }
+  servers :80 {
+    protocol {
+      allow_h2c
+    }
+  }
+}
+
+(realip) {
+  realip {
+    header "X-Forwarded-For"
+    from cloudflare
+    from 10.0.0.0/8
+    from 172.16.0.0/16
+    from 192.168.0.0/16
+    maxhops 5
+  }
+}
+
+(cors) {
+  header Access-Control-Allow-Methods "POST, GET, OPTIONS"
+  header Access-Control-Allow-Headers "*"
+  header Access-Control-Allow-Origin "{args.0}"
+}
