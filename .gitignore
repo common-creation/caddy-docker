@@ -3,3 +3,4 @@ etc/*
 svr/*
 !**/.gitkeep
 .env
+docker-compose.yml
