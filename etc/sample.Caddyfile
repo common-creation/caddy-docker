@@ -3,16 +3,6 @@
   order realip first
   cert_issuer zerossl {env.ZEROSSL_API_KEY}
   acme_dns cloudflare {env.CLOUDFLARE_API_KEY}
-  servers :443 {
-    protocol {
-      experimental_http3
-    }
-  }
-  servers :80 {
-    protocol {
-      allow_h2c
-    }
-  }
 }
 
 (realip) {
@@ -31,3 +21,8 @@
   header Access-Control-Allow-Headers "*"
   header Access-Control-Allow-Origin "{args.0}"
 }
+
+# hoge.common-creation.com {
+# import realip
+# reverse_proxy * http://127.0.0.1:1234
+# }
